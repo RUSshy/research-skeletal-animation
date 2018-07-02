@@ -1,4 +1,4 @@
-﻿#version 150 core
+﻿#version 330
 
 uniform vec4 Color;
 uniform sampler2D TextureId;

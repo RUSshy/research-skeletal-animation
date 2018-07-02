@@ -28,24 +28,24 @@ namespace Graphics
             : base(640, 480, new GraphicsMode(new ColorFormat(8, 8, 8, 8), 16), "Viewer",
                    GameWindowFlags.Default, DisplayDevice.Default, 4, 1, GraphicsContextFlags.Debug)
         {
-            frontOrtho = new View(0, 0, 0.5 * Width, 0.5 * Height, ProjectionMode.Orthographic);
+            frontOrtho = new View( 0, 0, 0.5 * Width, 0.5 * Height, ProjectionMode.Orthographic );
             frontOrtho.Camera.Position = Direction.Forward * 100.0f;
-            frontOrtho.Camera.LookAt(Vector3.Zero);
+            frontOrtho.Camera.LookAt( Vector3.Zero );
 
-            topOrtho = new View(0, 0.5 * Height, 0.5 * Width, Height - 0.5 * Height, ProjectionMode.Orthographic);
+            topOrtho = new View( 0, 0.5 * Height, 0.5 * Width, Height - 0.5 * Height, ProjectionMode.Orthographic );
             topOrtho.Camera.Position = Direction.Up * 100.0f;
-            topOrtho.Camera.LookAt(Vector3.Zero, Direction.Forward);
+            topOrtho.Camera.LookAt( Vector3.Zero, Direction.Forward );
 
-            rightOrtho = new View(0.5 * Width, 0, Width - 0.5 * Width, 0.5 * Height, ProjectionMode.Orthographic);
+            rightOrtho = new View( 0.5 * Width, 0, Width - 0.5 * Width, 0.5 * Height, ProjectionMode.Orthographic );
             rightOrtho.Camera.Position = Direction.Right * 100.0f;
-            rightOrtho.Camera.LookAt(Vector3.Zero);
+            rightOrtho.Camera.LookAt( Vector3.Zero );
 
-            mainView = new View(0.5 * Width, 0.5 * Height, Width - 0.5 * Width, Height - 0.5 * Height);
-            mainView.Camera.Position = new Vector3(50.0F, 100.0F, -100.0F);
-            mainView.Camera.LookAt(Vector3.Zero);
+            mainView = new View( 0.5 * Width, 0.5 * Height, Width - 0.5 * Width, Height - 0.5 * Height );
+            mainView.Camera.Position = new Vector3( 50.0F, 100.0F, -100.0F );
+            mainView.Camera.LookAt( Vector3.Zero );
 
-            Keyboard.KeyDown += OnKeyDown;
-            Mouse.Move += OnMouseMove;
+            KeyDown += OnKeyDown;
+            MouseMove += OnMouseMove;
         }
 
         protected override void OnLoad(EventArgs e)
@@ -78,60 +78,60 @@ namespace Graphics
 
         private void CheckKeyboard()
         {
-            if(Keyboard[Key.Escape])
+            if(Keyboard.GetState()[Key.Escape])
                 Exit();
 
-            if(Keyboard[Key.T] && FocusObject != null)
+            if(Keyboard.GetState()[Key.T] && FocusObject != null)
             {
-                if(Keyboard[Key.Up])
+                if(Keyboard.GetState()[Key.Up])
                     FocusObject.Move(Direction.Forward * MovementSpeed);
-                if(Keyboard[Key.Down])
+                if(Keyboard.GetState()[Key.Down])
                     FocusObject.Move(Direction.Backward * MovementSpeed);
-                if(Keyboard[Key.Left])
+                if(Keyboard.GetState()[Key.Left])
                     FocusObject.Move(Direction.Left * MovementSpeed);
-                if(Keyboard[Key.Right])
+                if(Keyboard.GetState()[Key.Right])
                     FocusObject.Move(Direction.Right * MovementSpeed);
-                if(Keyboard[Key.O])
+                if(Keyboard.GetState()[Key.O])
                     FocusObject.Move(Direction.Up * MovementSpeed);
-                if(Keyboard[Key.L])
+                if(Keyboard.GetState()[Key.L])
                     FocusObject.Move(Direction.Down * MovementSpeed);
-                if(Keyboard[Key.P])
+                if(Keyboard.GetState()[Key.P])
                     FocusObject.Position = Vector3.Zero;
             }
-            else if(Keyboard[Key.R] && FocusObject != null)
+            else if(Keyboard.GetState()[Key.R] && FocusObject != null)
             {
-                if(Keyboard[Key.Up])
+                if(Keyboard.GetState()[Key.Up])
                     FocusObject.Rotate(Direction.Forward, RotationSpeed);
-                if(Keyboard[Key.Down])
+                if(Keyboard.GetState()[Key.Down])
                     FocusObject.Rotate(Direction.Backward, RotationSpeed);
-                if(Keyboard[Key.Left])
+                if(Keyboard.GetState()[Key.Left])
                     FocusObject.Rotate(Direction.Left, RotationSpeed);
-                if(Keyboard[Key.Right])
+                if(Keyboard.GetState()[Key.Right])
                     FocusObject.Rotate(Direction.Right, RotationSpeed);
-                if(Keyboard[Key.O])
+                if(Keyboard.GetState()[Key.O])
                     FocusObject.Rotate(Direction.Up, RotationSpeed);
-                if(Keyboard[Key.L])
+                if(Keyboard.GetState()[Key.L])
                     FocusObject.Rotate(Direction.Down, RotationSpeed);
-                if(Keyboard[Key.P])
+                if(Keyboard.GetState()[Key.P])
                     FocusObject.Rotation = Quaternion.Identity;
             }
             else
             {
-                if(Keyboard[Key.Up])
+                if(Keyboard.GetState()[Key.Up])
                     mainView.Camera.Move(Direction.Forward * MovementSpeed);
-                if(Keyboard[Key.Down])
+                if(Keyboard.GetState()[Key.Down])
                     mainView.Camera.Move(Direction.Backward * MovementSpeed);
-                if(Keyboard[Key.Right])
+                if(Keyboard.GetState()[Key.Right])
                     mainView.Camera.Move(Direction.Right * MovementSpeed);
-                if(Keyboard[Key.Left])
+                if(Keyboard.GetState()[Key.Left])
                     mainView.Camera.Move(Direction.Left * MovementSpeed);
-                if(Keyboard[Key.O])
+                if(Keyboard.GetState()[Key.O])
                     mainView.Camera.Move(Direction.Up * MovementSpeed, Space.World);
-                if(Keyboard[Key.L])
+                if(Keyboard.GetState()[Key.L])
                     mainView.Camera.Move(Direction.Down * MovementSpeed, Space.World);
             }
 
-            if(Keyboard[Key.C] && FocusObject != null)
+            if(Keyboard.GetState()[Key.C] && FocusObject != null)
             {
                 mainView.Camera.LookAt(FocusObject.Position);
             }

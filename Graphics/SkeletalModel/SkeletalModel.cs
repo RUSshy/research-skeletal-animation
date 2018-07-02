@@ -78,6 +78,8 @@ namespace Graphics
                 poses.Add(pose);
             }
 
+            // todo: refactor the way animations are loaded/added
+            if(animationPoses.ContainsKey(animation.Name) == false)
             animationPoses.Add(animation.Name, poses);
         }
 
@@ -107,9 +109,9 @@ namespace Graphics
             Matrix4[] prev = animationPoses[animation][prevFrame].MatrixArray;
             Matrix4[] next = animationPoses[animation][nextFrame].MatrixArray;
 
-            Matrix4[] inter = Util.Math.InterpolateMatrix(prev, next, blend);
+            //Matrix4[] inter = Util.Math.InterpolateMatrix(prev, next, blend);
 
-            shaderProgram.SetUniform("Bones", inter);
+            shaderProgram.SetUniform("Bones", next);
         }
 
         #endregion

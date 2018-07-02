@@ -135,6 +135,8 @@ namespace Graphics.Importers.IdTech4
                         if(expectedWeightCount != currentMesh.Vertices.Sum(x => ((SkeletalVertex)x).Weights.Count))
                             throw new FormatException("incorrect number of weights for mesh '" + currentMesh.Name + "', expected=" + expectedWeightCount + ", actual=" + currentMesh.Vertices.Sum(x => ((SkeletalVertex)x).Weights.Count));
                     }
+                    
+                    // counting
                     else if(parts[0] == VertexCountFlag)
                     {
                         expectedVertexCount = Convert.ToInt32(parts[1]);
@@ -149,6 +151,7 @@ namespace Graphics.Importers.IdTech4
                     {
                         expectedWeightCount = Convert.ToInt32(parts[1]);
                     }
+                    
                     else if(parts[0] == VertexFlag)
                     {
                         // vert index ( u v ) startWeight weightCount

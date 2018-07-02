@@ -58,7 +58,9 @@ namespace Graphics
 
         protected virtual void RecalculateTransformation()
         {
-            transformation = Matrix4.CreateFromQuaternion(rotation) * Matrix4.CreateScale(scale) * Matrix4.CreateTranslation(position);
+            transformation = Matrix4.CreateFromQuaternion(rotation) 
+                             * Matrix4.CreateScale(scale) 
+                             * Matrix4.CreateTranslation(position);
         }
 
         public void Move(Vector3 delta, Space space = Space.Local)
@@ -114,6 +116,7 @@ namespace Graphics
         {
             currentPose = null;
             currentAnimation = Assets.Retrieve<Animation>(animation);
+            Model.AddAnimation(currentAnimation);
             animationStartTime = DateTime.UtcNow - offset;
         }
 
